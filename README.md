@@ -28,4 +28,12 @@ To set up and run the command plugin, follow these steps:
 
 5. **Run the plugin.** You can run the plugin using the command `python3 main.py` or `python main.py`. This will start the plugin and it will begin listening for requests.
 
+6. **Configure ChatGPT to use the plugin.** To configure ChatGPT to use the plugin, follow these steps:
+
+* Navigate to https://chat.openai.com.
+* In the Model drop down, select "Plugins" (note, if you don't see it there, you don't have access yet).
+* Select "Plugin store"
+* Select "Develop your own plugin"
+* Enter in localhost:5003 since this is the URL the server is running on locally, then select "Find manifest file".
+
 Remember, this plugin allows the execution of arbitrary commands on your system. Always ensure that the system running the plugin is secure and isolated from sensitive data or networks.
