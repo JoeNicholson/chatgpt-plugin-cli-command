@@ -1,0 +1,30 @@
+openapi: 3.0.1
+info:
+  title: Command Execution Plugin
+  description: A plugin that executes a Linux command on the host PC using ChatGPT.
+  version: 'v1'
+servers:
+  - url: http://localhost:5004
+paths:
+  /command:
+    post:
+      operationId: executeCommand
+      summary: Execute a Linux command
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                command:
+                  type: string
+                  description: The command to execute.
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: The output of the command.
