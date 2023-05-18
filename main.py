@@ -17,6 +17,12 @@ app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.c
 
 @app.post("/command")
 async def command():
+    """
+    Execute a shell command and return the output.
+
+    This function receives a JSON request with a "command" field, executes the command,
+    and returns the output. If the command fails, the function returns the error message.
+    """
     data = await request.get_json()
     command = data.get("command", "")
     logging.info(f"Received command: {command}")
@@ -53,6 +59,11 @@ async def openapi_spec():
         return quart.Response(text, mimetype="text/yaml")
 
 def main():
+    """
+    Run the Quart application.
+
+    This function starts the Quart application, which listens for HTTP requests on port 5004.
+    """
     app.run(debug=True, host="0.0.0.0", port=5004)
 
 if __name__ == "__main__":
