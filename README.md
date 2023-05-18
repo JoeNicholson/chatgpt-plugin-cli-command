@@ -40,7 +40,9 @@ git clone https://github.com/JoeNicholson/chatgpt-plugin-cli-command.git
 $ pip install quart requests
 ```
 
-4. ## Configuration
+4. **Configure the plugin**
+
+These are stored in a file called `settings.json`.
 
 Copy the example settings file:
 
@@ -60,7 +62,7 @@ For example, if you want to use `/tmp` as the working directory, you would chang
 ```
 
 
-4. **Run the plugin.** You can run the plugin using the command `python3 main.py` or `python main.py`. This will start the plugin and it will begin listening for requests.
+5. **Run the plugin.** You can run the plugin using the command `python3 main.py` or `python main.py`. This will start the plugin and it will begin listening for requests.
 
 ```
 $ python3 main.py 
@@ -73,7 +75,7 @@ $ python3 main.py
 
 ```
 
-5. **Configure ChatGPT to use the plugin.** To configure ChatGPT to use the plugin, follow these steps:
+6. **Configure ChatGPT to use the plugin.** To configure ChatGPT to use the plugin, follow these steps:
 
 * Navigate to https://chat.openai.com.
 * In the Model drop down, select "Plugins" (note, if you don't see it there, you don't have access yet).
