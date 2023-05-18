@@ -40,6 +40,26 @@ git clone https://github.com/JoeNicholson/chatgpt-plugin-cli-command.git
 $ pip install quart requests
 ```
 
+4. ## Configuration
+
+Copy the example settings file:
+
+```
+$ cp settings.json.example settings.json
+```
+
+Open `settings.json` and modify the `working_directory` value to the directory you want to use as the working directory.
+
+For example, if you want to use `/tmp` as the working directory, you would change the `working_directory` value to `/tmp`.
+
+```
+{        
+    "_comment": "This is the working directory for commands",
+    "working_directory": "/tmp"
+}
+```
+
+
 4. **Run the plugin.** You can run the plugin using the command `python3 main.py` or `python main.py`. This will start the plugin and it will begin listening for requests.
 
 ```
