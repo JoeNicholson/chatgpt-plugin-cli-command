@@ -1,27 +1,38 @@
 import json
+import logging
 import quart
 import quart_cors
 from quart import request
 import subprocess
 
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+
+# Load settings
+with open("settings.json") as f:
+    settings = json.load(f)
+cwd = settings.get("working_directory", ".")
 
 app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.com")
 
 @app.post("/command")
 async def command():
     data = await request.get_json()
-    print(data)
     command = data.get("command", "")
-    print(command)
+    logging.info(f"Received command: {command}")
 
-    with open("settings.json") as f:
-        settings = json.load(f)
-    cwd = settings.get("working_directory", ".")
+    try:
+        my_process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, cwd=cwd)
+        stdout, stderr = my_process.communicate()
+        if my_process.returncode != 0:
+            return quart.Response(response=stderr.decode("utf-8"), status=500)
+        else:
+            return quart.Response(response=stdout.decode("utf-8"), status=200)
+    except Exception as e:
+        logging.error(f"Error executing command: {e}")
+        return quart.Response(response=str(e), status=500)
 
-    my_process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, cwd=cwd)
-    stdout, stderr = my_process.communicate()
-    return quart.Response(response=stdout.decode("utf-8"), status=200)
-
+ 
 @app.get("/logo.png")
 async def plugin_logo():
     filename = "logo.png"
